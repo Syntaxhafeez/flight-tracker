@@ -225,7 +225,7 @@ function BrandAdRail() {
       aria-label="Sponsored"
       className="block"
     >
-      <div className="rounded-3xl border border-emerald-200/30 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.25),transparent_55%),linear-gradient(135deg,#0f2b1f,#173326)] p-4 shadow-[0_18px_60px_rgba(15,43,31,0.4)]">
+      <div className="rounded-3xl border border-emerald-200/20 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.18),transparent_55%),linear-gradient(135deg,#0a1410,#0f1b15)] p-3 shadow-[0_14px_46px_rgba(10,20,16,0.45)]">
         <div className="mb-3 flex items-center justify-between gap-3">
           <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-100/80 sm:text-[10px]">Sponsored</span>
           <span className="text-[9px] text-emerald-200/70 sm:text-[10px]">Recommended for travel</span>
@@ -234,23 +234,23 @@ function BrandAdRail() {
           href={brandAd.siteUrl}
           target="_blank"
           rel="noreferrer"
-          className="group block overflow-hidden rounded-2xl border border-emerald-100/20 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.18),transparent_55%),linear-gradient(135deg,#0f2b1f,#1c3a2a)] text-emerald-50 shadow-[0_16px_50px_rgba(15,43,31,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_60px_rgba(15,43,31,0.7)]"
+          className="group block overflow-hidden rounded-2xl border border-emerald-100/15 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_60%),linear-gradient(135deg,#0a1410,#122016)] text-emerald-50 shadow-[0_12px_36px_rgba(10,20,16,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(10,20,16,0.7)]"
         >
-          <div className="flex flex-col gap-3 p-4">
+          <div className="flex flex-col gap-2 p-3">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div
-                  className="flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold text-emerald-50"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-[11px] font-semibold text-emerald-50"
                   style={{ backgroundColor: "#16a34a" }}
                 >
                   {brandAd.brand.slice(0, 1)}
                 </div>
                 <div>
-                  <p className="text-base font-semibold tracking-[-0.03em]">{brandAd.brand}</p>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-emerald-100/60">Travel agency</p>
+                  <p className="text-sm font-semibold tracking-[-0.03em]">{brandAd.brand}</p>
+                  <p className="text-[8px] uppercase tracking-[0.2em] text-emerald-100/60">Travel agency</p>
                 </div>
               </div>
-              <span className="rounded-full border border-emerald-100/30 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-100/80">
+              <span className="rounded-full border border-emerald-100/25 px-2.5 py-0.5 text-[8px] font-semibold uppercase tracking-[0.18em] text-emerald-100/80">
                 Visit site
               </span>
             </div>
@@ -263,17 +263,16 @@ function BrandAdRail() {
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.35 }}
               >
-                <p className="text-lg font-semibold leading-6">{slide.title}</p>
-                <p className="mt-2 text-sm leading-6 text-emerald-50/80">{slide.text}</p>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/70">{slide.support}</p>
+                <p className="text-sm font-semibold leading-5">{slide.title}</p>
+                <p className="mt-1.5 text-xs leading-5 text-emerald-50/80">{slide.text}</p>
               </motion.div>
             </AnimatePresence>
 
             <div className="flex flex-wrap gap-2">
-              {slide.highlights.slice(0, 2).map((item) => (
+              {slide.highlights.slice(0, 1).map((item) => (
                 <div
                   key={`${brandAd.brand}-${item}`}
-                  className="rounded-full border border-emerald-100/20 bg-emerald-100/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-50/90"
+                  className="rounded-full border border-emerald-100/20 bg-emerald-100/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-emerald-50/90"
                 >
                   {item}
                 </div>
@@ -281,10 +280,10 @@ function BrandAdRail() {
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <span className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-950">
+              <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-950">
                 {brandAd.cta}
               </span>
-              <span className="text-[10px] text-emerald-100/70">Quotes in 24 hours.</span>
+              <span className="text-[9px] text-emerald-100/70">Quotes in 24 hours.</span>
             </div>
           </div>
         </a>
