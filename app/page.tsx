@@ -93,11 +93,11 @@ export default function Home() {
       <div className="mx-auto flex w-full max-w-400 flex-col gap-4">
         <AdSlot
           imageSrc="/GBS Website banner 2181X267.png"
-          imageAlt="Global Blockchain Show Riyadh banner"
+          imageAlt="Global Games Show Riyadh banner"
           width={2181}
           height={267}
           priority
-          href="https://globalblockchainshow.com/riyadh"
+          href="https://globalgamesshow.com/riyadh"
         />
 
         <header className="glass-panel rounded-[28px] px-4 py-4 sm:px-5">
@@ -163,10 +163,10 @@ export default function Home() {
 
         <AdSlot
           imageSrc="/GBS 720X90.png"
-          imageAlt="Global Games Show Riyadh banner"
+          imageAlt="Global Blockchain Show Riyadh banner"
           width={720}
           height={90}
-          href="https://globalgamesshow.com/riyadh"
+          href="https://globalblockchainshow.com/riyadh"
         />
       </div>
     </main>
