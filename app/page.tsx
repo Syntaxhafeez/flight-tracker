@@ -93,10 +93,11 @@ export default function Home() {
       <div className="mx-auto flex w-full max-w-400 flex-col gap-4">
         <AdSlot
           imageSrc="/GBS Website banner 2181X267.png"
-          imageAlt="Advertisement banner"
+          imageAlt="Global Blockchain Show Riyadh banner"
           width={2181}
           height={267}
           priority
+          href="https://globalblockchainshow.com/riyadh"
         />
 
         <header className="glass-panel rounded-[28px] px-4 py-4 sm:px-5">
@@ -162,121 +163,131 @@ export default function Home() {
 
         <AdSlot
           imageSrc="/GBS 720X90.png"
-          imageAlt="Advertisement banner"
+          imageAlt="Global Games Show Riyadh banner"
           width={720}
           height={90}
+          href="https://globalgamesshow.com/riyadh"
         />
       </div>
     </main>
   );
 }
 
-const brandAds = [
-  {
-    brand: "Amazon",
-    title: "Travel essentials for the next connection",
-    text: "Cabin bags, adapters, headphones, and comfort gear selected for frequent flyers.",
-    cta: "Shop travel",
-    siteUrl: "https://www.amazon.com",
-    accent: "#FF9900",
-    previews: ["#0f172a", "#1f2937", "#374151"],
-  },
-  {
-    brand: "Google",
-    title: "Airport routes and local discovery",
-    text: "Find places, routes, and travel tools before you reach the arrival gate.",
-    cta: "Explore tools",
-    siteUrl: "https://www.google.com",
-    accent: "#4285F4",
-    previews: ["#0b1020", "#1d2a44", "#2b3b64"],
-  },
-  {
-    brand: "Samsung",
-    title: "Galaxy devices for long journeys",
-    text: "Phones, tablets, watches, and accessories built for work and entertainment in transit.",
-    cta: "See devices",
-    siteUrl: "https://www.samsung.com",
-    accent: "#1D4ED8",
-    previews: ["#0c142e", "#1b2d5a", "#2a4384"],
-  },
-  {
-    brand: "Wise",
-    title: "Spend and move money abroad",
-    text: "International payments and travel spending tools for cross-border trips.",
-    cta: "View options",
-    siteUrl: "https://wise.com",
-    accent: "#00B67A",
-    previews: ["#0c2a23", "#0f3b31", "#0e4a37"],
-  },
-];
+const brandAd = {
+  brand: "DPauls.com",
+  title: "Premium travel planning and curated holiday packages",
+  text:
+    "Personalized itineraries, visa guidance, and end-to-end holiday management for business and leisure travel.",
+  support: "Dedicated travel consultants with fast quotes and destination expertise.",
+  highlights: ["Custom itineraries", "Visa assistance", "Group travel", "24x7 support"],
+  variants: [
+    {
+      title: "Premium travel planning and curated holiday packages",
+      text:
+        "Personalized itineraries, visa guidance, and end-to-end holiday management for business and leisure travel.",
+      support: "Dedicated travel consultants with fast quotes and destination expertise.",
+      highlights: ["Custom itineraries", "Visa assistance", "Group travel", "24x7 support"],
+    },
+    {
+      title: "Luxury escapes, corporate travel, and family vacations",
+      text:
+        "Experience-led journeys with premium stays, guided experiences, and concierge-managed travel schedules.",
+      support: "Priority support, itinerary optimization, and real-time itinerary updates.",
+      highlights: ["Luxury stays", "Corporate travel", "Family tours", "Concierge support"],
+    },
+    {
+      title: "Visa-ready trips with complete documentation support",
+      text:
+        "From documentation to embassy timelines, DPauls keeps your visa process aligned with your travel plan.",
+      support: "Structured checklists, appointment guidance, and document verification.",
+      highlights: ["Visa planning", "Document checks", "Appointment help", "Fast turnaround"],
+    },
+  ],
+  cta: "Explore packages",
+  siteUrl: "https://www.dpauls.com",
+  accent: "#22c55e",
+};
 
 function BrandAdRail() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % brandAd.variants.length);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const slide = brandAd.variants[activeSlide] ?? brandAd;
   return (
     <aside
       aria-label="Sponsored"
-      className="hidden xl:block"
+      className="block"
     >
-      <div className="rounded-3xl border border-white/10 bg-[#0b1220] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+      <div className="rounded-3xl border border-emerald-200/30 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.25),transparent_55%),linear-gradient(135deg,#0f2b1f,#173326)] p-4 shadow-[0_18px_60px_rgba(15,43,31,0.4)]">
         <div className="mb-3 flex items-center justify-between gap-3">
-          <span className="text-[11px] uppercase tracking-[0.2em] text-slate-400">Sponsored</span>
-          <span className="text-xs text-slate-500">Recommended for travel</span>
+          <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-100/80 sm:text-[10px]">Sponsored</span>
+          <span className="text-[9px] text-emerald-200/70 sm:text-[10px]">Recommended for travel</span>
         </div>
-        <div className="grid gap-3 2xl:grid-cols-4">
-          {brandAds.map((ad) => (
-            <article
-              key={ad.brand}
-              className="flex min-h-44 flex-col justify-between rounded-2xl border border-slate-700/60 bg-white p-4 text-slate-950 shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white"
-                    style={{ backgroundColor: ad.accent }}
-                  >
-                    {ad.brand.slice(0, 1)}
-                  </div>
-                  <div>
-                    <p className="text-base font-semibold tracking-[-0.03em]">{ad.brand}</p>
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-500">Sponsored</p>
-                  </div>
-                </div>
-                <a
-                  href={ad.siteUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-slate-200 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-700 transition hover:border-slate-300"
+        <a
+          href={brandAd.siteUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="group block overflow-hidden rounded-2xl border border-emerald-100/20 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.18),transparent_55%),linear-gradient(135deg,#0f2b1f,#1c3a2a)] text-emerald-50 shadow-[0_16px_50px_rgba(15,43,31,0.55)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_60px_rgba(15,43,31,0.7)]"
+        >
+          <div className="flex flex-col gap-3 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div
+                  className="flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold text-emerald-50"
+                  style={{ backgroundColor: "#16a34a" }}
                 >
-                  Details
-                </a>
-              </div>
-
-              <div className="mt-4">
-                <p className="text-sm font-semibold leading-5">{ad.title}</p>
-                <p className="mt-2 text-xs leading-5 text-slate-600">{ad.text}</p>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  {ad.previews.map((color, index) => (
-                    <div
-                      key={`${ad.brand}-preview-${index}`}
-                      className="h-10 w-14 rounded-lg border border-slate-200"
-                      style={{ backgroundColor: color }}
-                    />
-                  ))}
+                  {brandAd.brand.slice(0, 1)}
                 </div>
-                <a
-                  href={ad.siteUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-slate-800"
-                >
-                  {ad.cta}
-                </a>
+                <div>
+                  <p className="text-base font-semibold tracking-[-0.03em]">{brandAd.brand}</p>
+                  <p className="text-[9px] uppercase tracking-[0.2em] text-emerald-100/60">Travel agency</p>
+                </div>
               </div>
-            </article>
-          ))}
-        </div>
+              <span className="rounded-full border border-emerald-100/30 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-100/80">
+                Visit site
+              </span>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`slide-${activeSlide}`}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+              >
+                <p className="text-lg font-semibold leading-6">{slide.title}</p>
+                <p className="mt-2 text-sm leading-6 text-emerald-50/80">{slide.text}</p>
+                <p className="mt-2 text-sm leading-6 text-emerald-100/70">{slide.support}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex flex-wrap gap-2">
+              {slide.highlights.slice(0, 2).map((item) => (
+                <div
+                  key={`${brandAd.brand}-${item}`}
+                  className="rounded-full border border-emerald-100/20 bg-emerald-100/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-50/90"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-950">
+                {brandAd.cta}
+              </span>
+              <span className="text-[10px] text-emerald-100/70">Quotes in 24 hours.</span>
+            </div>
+          </div>
+        </a>
       </div>
     </aside>
   );
@@ -288,30 +299,38 @@ function AdSlot({
   width,
   height,
   priority = false,
+  href,
 }: {
   imageSrc: string;
   imageAlt: string;
   width: number;
   height: number;
   priority?: boolean;
+  href: string;
 }) {
+  const Tag = href ? "a" : "div";
   return (
     <section aria-label="Sponsored" className="overflow-hidden rounded-[18px] bg-transparent">
-      <div className="relative w-full overflow-hidden bg-black">
+      <Tag
+        href={href}
+        target={href ? "_blank" : undefined}
+        rel={href ? "noreferrer" : undefined}
+        className="relative block w-full overflow-hidden bg-transparent"
+        style={{ aspectRatio: `${width}/${height}` }}
+      >
         <Image
           src={imageSrc}
           alt={imageAlt}
-          width={width}
-          height={height}
+          fill
           sizes="100vw"
-          className="h-auto w-full"
+          className="object-contain"
           priority={priority}
           unoptimized
         />
-        <span className="absolute right-2 top-2 rounded-sm bg-black/60 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-white/80">
+        <span className="absolute right-2 top-1 rounded-sm bg-black/60 px-2 py-1 text-[6px] uppercase tracking-[0.16em] text-white/80 sm:text-[10px]">
           Sponsored
         </span>
-      </div>
+      </Tag>
     </section>
   );
 }

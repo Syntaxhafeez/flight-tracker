@@ -84,9 +84,9 @@ export default function MapComponent({ flightData, isLoading }: MapComponentProp
     <div className="relative">
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-3 p-3 sm:p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <div className="rounded-2xl border border-white/10 bg-slate-950/72 px-4 py-3 backdrop-blur-md">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-500">World map</p>
-            <h2 className="mt-1 text-lg font-semibold tracking-[-0.04em] text-white">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/72 px-3 py-2 backdrop-blur-md sm:px-4 sm:py-3">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 sm:text-xs">World map</p>
+            <h2 className="mt-1 text-base font-semibold tracking-[-0.04em] text-white sm:text-lg">
               {flight ? `${flight.departure.iata} to ${flight.arrival.iata}` : "Global airspace"}
             </h2>
           </div>
@@ -235,9 +235,9 @@ export default function MapComponent({ flightData, isLoading }: MapComponentProp
 
 function MapBadge({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
   return (
-    <div className="rounded-full border border-white/10 bg-slate-950/78 px-3 py-2 text-xs text-slate-200 backdrop-blur-md sm:text-sm">
+    <div className="rounded-full border border-white/10 bg-slate-950/78 px-2.5 py-1.5 text-[10px] text-slate-200 backdrop-blur-md sm:px-3 sm:py-2 sm:text-xs">
       <div className="flex items-center gap-2">
-        <Icon size={14} className="text-accent" />
+        <Icon size={12} className="text-accent sm:size-[14px]" />
         <span>{text}</span>
       </div>
     </div>
