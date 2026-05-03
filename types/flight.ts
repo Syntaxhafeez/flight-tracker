@@ -90,3 +90,33 @@ export interface AviationStackResponse {
   };
   data: FlightData[];
 }
+
+export type AirportBoardMode = "departure" | "arrival";
+
+export interface AirportBoardFlight {
+  id: string;
+  flightDate: string;
+  status: string;
+  time: string;
+  scheduled: string;
+  estimated: string | null;
+  actual: string | null;
+  timezone: string;
+  flightNumber: string;
+  flightIata: string;
+  airline: string;
+  airportName: string;
+  airportIata: string;
+  airportTimezone: string;
+  terminal: string | null;
+  gate: string | null;
+  delay: number | null;
+  aircraftRegistration: string | null;
+}
+
+export interface AirportBoardData {
+  airportCode: string;
+  mode: AirportBoardMode;
+  generatedAt: string;
+  flights: AirportBoardFlight[];
+}

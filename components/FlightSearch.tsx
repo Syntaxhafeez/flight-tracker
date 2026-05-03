@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Loader2, Search } from "lucide-react";
+import { ArrowRight, Loader2, Search } from "lucide-react";
 
 import { cn } from "@/utils/cn";
 
@@ -35,14 +35,14 @@ export default function FlightSearch({
       <form onSubmit={handleSubmit}>
         <div
           className={cn(
-            "relative overflow-hidden rounded-[22px] border bg-white/[0.03] transition-all duration-300",
+            "relative overflow-hidden rounded-[24px] border bg-[#0b1627]/90 transition-all duration-300",
             isFocused
-              ? "border-accent/60 shadow-[0_0_0_4px_rgba(34,211,238,0.08)]"
-              : "border-white/10",
+              ? "border-accent/70 shadow-[0_0_0_5px_rgba(94,234,212,0.08),0_24px_55px_rgba(14,165,233,0.14)]"
+              : "border-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
           )}
         >
-          <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-            <Search size={18} className={cn(isFocused && "text-accent")} />
+          <div className="pointer-events-none absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-slate-400 sm:left-4">
+            <Search size={20} className={cn(isFocused && "text-accent")} />
           </div>
           <input
             type="text"
@@ -51,16 +51,23 @@ export default function FlightSearch({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder="Search flight, e.g. 6E1271"
-            className="h-14 w-full bg-transparent pl-12 pr-28 text-sm font-medium uppercase tracking-[0.22em] text-white outline-none placeholder:tracking-[0.12em] placeholder:text-slate-500 sm:text-base"
+            className="h-18 w-full bg-transparent pl-18 pr-31 text-sm font-semibold uppercase tracking-[0.18em] text-white outline-none placeholder:tracking-[0.16em] placeholder:text-slate-500 sm:h-20 sm:pl-20 sm:pr-38 sm:text-lg"
             disabled={isLoading}
             maxLength={8}
           />
           <button
             type="submit"
             disabled={!flightNumber.trim() || isLoading}
-            className="absolute right-2 top-2 inline-flex h-10 items-center justify-center rounded-2xl bg-gradient-to-r from-accent to-accent-strong px-4 text-sm font-semibold text-accent-foreground shadow-[0_18px_30px_rgba(34,211,238,0.22)] transition disabled:cursor-not-allowed disabled:opacity-60"
+            className="absolute right-2 top-2 inline-flex h-14 items-center justify-center gap-2 rounded-[20px] bg-linear-to-r from-accent to-accent-strong px-4 text-sm font-bold text-accent-foreground shadow-[0_22px_42px_rgba(34,211,238,0.24)] transition hover:translate-y-[-1px] hover:shadow-[0_26px_52px_rgba(34,211,238,0.3)] disabled:cursor-not-allowed disabled:opacity-60 sm:h-16 sm:px-5"
           >
-            {isLoading ? <Loader2 size={18} className="animate-spin" /> : "Track"}
+            {isLoading ? (
+              <Loader2 size={19} className="animate-spin" />
+            ) : (
+              <>
+                <span>Track</span>
+                <ArrowRight size={17} />
+              </>
+            )}
           </button>
         </div>
       </form>
@@ -72,7 +79,7 @@ export default function FlightSearch({
               key={search}
               type="button"
               onClick={() => selectPreset(search)}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-slate-200 transition hover:border-accent/40 hover:bg-accent/10 hover:text-white"
+              className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-200 transition hover:border-accent/40 hover:bg-accent/10 hover:text-white"
             >
               {search}
             </button>
