@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Activity, AlertCircle, Plane, RadioTower } from "lucide-react";
+import { AlertCircle, Plane } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import AirportBoard from "@/components/AirportBoard";
@@ -112,12 +112,12 @@ export default function Home() {
           <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/70 to-transparent" />
           <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(94,234,212,0.08),transparent_36%,rgba(56,189,248,0.08)_76%,transparent)]" />
 
-          <div className="relative grid gap-5 p-4 sm:p-5 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:p-6">
+          <div className="relative grid gap-4 p-4 sm:p-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:p-5">
             <div className="min-w-0">
               <div className="flex items-center gap-4">
-                <div className="relative flex h-18 w-18 shrink-0 items-center justify-center rounded-[24px] border border-accent/30 bg-linear-to-br from-accent to-accent-strong text-accent-foreground shadow-[0_24px_60px_rgba(45,212,191,0.28)] sm:h-20 sm:w-20">
+                <div className="relative flex h-15 w-15 shrink-0 items-center justify-center rounded-[22px] border border-accent/30 bg-linear-to-br from-accent to-accent-strong text-accent-foreground shadow-[0_18px_42px_rgba(45,212,191,0.24)] sm:h-17 sm:w-17">
                   <div className="absolute inset-2 rounded-[18px] border border-white/35" />
-                  <Plane size={28} />
+                  <Plane size={25} />
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
@@ -127,26 +127,20 @@ export default function Home() {
                       Live
                     </span>
                   </div>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">
-                    Track aircraft, airport movement, route progress, and operational details from real aviation data.
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-slate-300">
+                    Track aircraft, airport movement, and operational details.
                   </p>
                 </div>
               </div>
-
-              <div className="mt-5 grid gap-2 sm:grid-cols-3">
-                <HeaderSignal icon={RadioTower} label="Source" value="Aviationstack" />
-                <HeaderSignal icon={Activity} label="Mode" value="Live lookup" />
-                <HeaderSignal icon={Plane} label="Example" value="6E1271" />
-              </div>
             </div>
 
-            <div className="relative rounded-[28px] border border-white/12 bg-[#07111f]/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_28px_70px_rgba(1,8,20,0.28)] sm:p-4">
+            <div className="relative rounded-[26px] border border-white/12 bg-[#07111f]/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_22px_56px_rgba(1,8,20,0.24)]">
               <div className="mb-3 flex items-center justify-between gap-3 px-1">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Flight command</p>
                   <p className="mt-1 text-sm text-slate-400">Enter a flight number to open the live map.</p>
                 </div>
-                <span className="hidden rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-slate-300 sm:inline-flex">
+                <span className="hidden rounded-full border border-white/10 bg-white/4 px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-slate-300 sm:inline-flex">
                   Real data
                 </span>
               </div>
@@ -196,6 +190,7 @@ export default function Home() {
               aircraftDisplayName={flightData?.aircraftDisplayName ?? null}
               defaultOpen
               onOpenChange={setIsSeatMapOpen}
+              redirectOnOpen
             />
           </div>
         </section>
@@ -209,28 +204,6 @@ export default function Home() {
         />
       </div>
     </main>
-  );
-}
-
-function HeaderSignal({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof Plane;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex min-h-16 items-center gap-3 rounded-[22px] border border-white/10 bg-white/[0.035] px-3 py-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/[0.06] text-accent">
-        <Icon size={17} />
-      </div>
-      <div className="min-w-0">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{label}</p>
-        <p className="mt-1 truncate text-sm font-semibold text-white">{value}</p>
-      </div>
-    </div>
   );
 }
 

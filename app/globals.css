@@ -36,6 +36,24 @@
   box-sizing: border-box;
 }
 
+button,
+[role="button"],
+a,
+summary,
+select,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
 html {
   background:
     radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 28%),

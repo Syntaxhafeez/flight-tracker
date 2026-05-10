@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AlertCircle,
   ArrowDownToLine,
@@ -15,19 +16,30 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import type { AirportBoardData, AirportBoardFlight, AirportBoardMode } from "@/types/flight";
 import { fetchAirportBoardData } from "@/utils/airportApi";
+import { getAirportSeoProfile } from "@/utils/airportSeo";
 import { cn } from "@/utils/cn";
 
 const REFRESH_INTERVAL_MS = 60000;
 
-export default function AirportBoard() {
-  const [airportCode, setAirportCode] = useState("");
+export default function AirportBoard({
+  initialAirport = "",
+  initialMode = "departure",
+  redirectOnSubmit = false,
+}: {
+  initialAirport?: string;
+  initialMode?: AirportBoardMode;
+  redirectOnSubmit?: boolean;
+}) {
+  const router = useRouter();
+  const [airportCode, setAirportCode] = useState(initialAirport);
   const [trackedAirport, setTrackedAirport] = useState("");
-  const [mode, setMode] = useState<AirportBoardMode>("departure");
+  const [mode, setMode] = useState<AirportBoardMode>(initialMode);
   const [boardData, setBoardData] = useState<AirportBoardData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null);
   const latestRequestRef = useRef("");
+  const loadedInitialRef = useRef(false);
 
   const loadAirportBoard = async (
     nextAirport: string,
@@ -78,9 +90,29 @@ export default function AirportBoard() {
     return () => window.clearInterval(interval);
   }, [trackedAirport, mode]);
 
+  useEffect(() => {
+    if (loadedInitialRef.current || !initialAirport) return;
+
+    loadedInitialRef.current = true;
+    const normalized = initialAirport.trim().toUpperCase();
+    const timeout = window.setTimeout(() => {
+      loadAirportBoard(normalized, initialMode);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [initialAirport, initialMode]);
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const normalized = airportCode.trim().toUpperCase();
+    if (redirectOnSubmit && /^[A-Z]{3}$/.test(normalized)) {
+      const airportProfile = getAirportSeoProfile(normalized);
+      const path = airportProfile
+        ? `/airport/${airportProfile.slug}?mode=${mode}`
+        : `/airport-arrivals-departures?airport=${normalized}&mode=${mode}`;
+      router.push(path);
+      return;
+    }
     setTrackedAirport(normalized);
     loadAirportBoard(normalized, mode);
   };
@@ -114,7 +146,7 @@ export default function AirportBoard() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <form onSubmit={handleSubmit} className="min-w-0 sm:w-75">
-              <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.04]">
+              <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/4">
                 <Search
                   aria-hidden="true"
                   className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -140,7 +172,7 @@ export default function AirportBoard() {
               </div>
             </form>
 
-            <div className="grid grid-cols-2 rounded-[22px] border border-white/10 bg-white/[0.04] p-1">
+            <div className="grid grid-cols-2 rounded-[22px] border border-white/10 bg-white/4 p-1">
               <ModeButton
                 active={mode === "departure"}
                 icon={ArrowUpFromLine}
@@ -179,7 +211,7 @@ export default function AirportBoard() {
       </AnimatePresence>
 
       <div className="p-2 sm:p-3">
-        <div className="overflow-hidden rounded-[24px] border border-white/10 bg-[#07111f]/58">
+        <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#07111f]/58">
           <div className="flex min-h-12 items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
             <div className="flex items-center gap-2 text-sm text-slate-300">
               <Clock3 size={16} className="text-accent" />
@@ -193,7 +225,7 @@ export default function AirportBoard() {
                 Syncing
               </span>
             ) : (
-              <span className="text-xs uppercase tracking-[0.18em] text-slate-500">Aviationstack live</span>
+              <span className="text-xs uppercase tracking-[0.18em] text-slate-500">Aerotrack live</span>
             )}
           </div>
 
@@ -258,7 +290,7 @@ function ModeButton({
         "inline-flex h-11 items-center justify-center gap-2 rounded-2xl px-3 text-xs font-semibold uppercase tracking-[0.16em] transition sm:px-4",
         active
           ? "bg-white text-[#07111f] shadow-[0_16px_34px_rgba(255,255,255,0.16)]"
-          : "text-slate-300 hover:bg-white/[0.06] hover:text-white",
+          : "text-slate-300 hover:bg-white/6 hover:text-white",
       )}
     >
       <Icon size={16} />
@@ -297,7 +329,7 @@ function FlightRow({ flight, mode }: { flight: AirportBoardFlight; mode: Airport
         <div className="truncate font-medium text-white">{flight.airline}</div>
       </td>
       <td className="max-w-72 border-b border-white/8 px-4 py-4 align-top">
-        <div className="font-mono font-semibold tracking-[0.1em] text-accent">{flight.airportIata}</div>
+        <div className="font-mono font-semibold tracking-widest text-accent">{flight.airportIata}</div>
         <div className="mt-1 truncate text-xs text-slate-400">
           {flight.airportName || (mode === "departure" ? "Destination unavailable" : "Origin unavailable")}
         </div>

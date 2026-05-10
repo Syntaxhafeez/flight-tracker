@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,6 +35,26 @@ export const metadata: Metadata = {
     "seat map",
     "aviation",
     "airline status",
+    "airport board",
+    "flight delay tracker",
+    "aircraft seat map checker",
+    "airport live status",
+    "airport arrivals today",
+    "airport departures today",
+    "flight number tracker",
+    "plane tracker",
+    "airplane tracker",
+    "flight map",
+    "gate status",
+    "terminal status",
+    "airline flight status",
+    "aircraft registration lookup",
+    "best airplane seats",
+    "aircraft seating chart",
+    "window seat checker",
+    "aisle seat checker",
+    "Boeing seat map",
+    "Airbus seat map",
   ],
   alternates: {
     canonical: "https://aerotrackr.online",
@@ -63,6 +85,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  appleWebApp: {
+    capable: true,
+    title: "AeroTrack",
+    statusBarStyle: "black-translucent",
+  },
   twitter: {
     card: "summary_large_image",
     title: "AeroTrack Live Flight Tracker",
@@ -87,25 +114,58 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "AeroTrack",
-  url: "https://aerotrackr.online",
-  description:
-    "Live flight tracking with real-time positions, airport intelligence, aircraft details, and seat maps.",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://aerotrackr.online/?flight={flight_number}",
-    "query-input": "required name=flight_number",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "AeroTrack",
-    url: "https://aerotrackr.online",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://aerotrackr.online/icon.svg",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "AeroTrack",
+      alternateName: "AeroTrackr",
+      url: "https://aerotrackr.online",
+      description:
+        "Live flight tracking with real-time positions, airport intelligence, aircraft details, and seat maps.",
+      inLanguage: "en",
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: "https://aerotrackr.online/?flight={flight_number}",
+          "query-input": "required name=flight_number",
+        },
+        {
+          "@type": "SearchAction",
+          target: "https://aerotrackr.online/airport-arrivals-departures?airport={airport_iata}",
+          "query-input": "required name=airport_iata",
+        },
+        {
+          "@type": "SearchAction",
+          target: "https://aerotrackr.online/seat-map-checker?aircraft={aircraft_type}&seat={seat_number}",
+          "query-input": "required name=aircraft_type",
+        },
+      ],
     },
-  },
+    {
+      "@type": "Organization",
+      name: "AeroTrack",
+      url: "https://aerotrackr.online",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://aerotrackr.online/icon.svg",
+      },
+      sameAs: ["https://aerotrackr.online/flight-tracker-information"],
+    },
+    {
+      "@type": "WebApplication",
+      name: "AeroTrack Live Flight Tracker",
+      applicationCategory: "TravelApplication",
+      operatingSystem: "Web",
+      url: "https://aerotrackr.online",
+      description:
+        "A real-time flight tracking dashboard for flight status, airport boards, aircraft details, route maps, and seat map previews.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -136,7 +196,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader />
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );

@@ -124,22 +124,22 @@ export default function SeatMap({
         />
       ) : null}
 
-      <div className="overflow-x-auto rounded-[30px] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.12),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(15,23,42,0.18))] p-3 sm:p-5">
-        <div className="min-w-max">
-          <div className="mx-auto mb-3 flex w-64 items-center justify-center rounded-t-[90px] border border-white/10 bg-white/[0.04] px-6 py-4 text-center text-xs uppercase tracking-[0.22em] text-slate-400">
+      <div className="max-h-[74vh] overflow-auto rounded-[30px] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.12),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(15,23,42,0.18))] p-2 sm:p-4">
+        <div className="mx-auto flex w-max min-w-full flex-col items-center">
+          <div className="mb-3 flex w-52 items-center justify-center rounded-t-[90px] border border-white/10 bg-white/[0.04] px-5 py-3 text-center text-[10px] uppercase tracking-[0.2em] text-slate-400 sm:w-64 sm:px-6 sm:py-4 sm:text-xs">
             Flight deck
           </div>
 
           <div
             className={cn(
-              "relative rounded-[48px] border border-white/12 bg-slate-950/70 px-7 py-6 shadow-[inset_0_0_50px_rgba(148,163,184,0.08)]",
-              layout.cabin === "narrow-body" ? "w-[430px]" : "w-[620px]",
+              "relative rounded-[34px] border border-white/12 bg-slate-950/70 px-4 py-5 shadow-[inset_0_0_50px_rgba(148,163,184,0.08)] sm:rounded-[48px] sm:px-7 sm:py-6",
+              layout.cabin === "narrow-body" ? "w-[350px] sm:w-[430px]" : "w-[510px] sm:w-[620px]",
             )}
           >
             <div className="pointer-events-none absolute inset-y-12 left-3 w-1.5 rounded-full bg-sky-200/20 shadow-[0_0_20px_rgba(125,211,252,0.24)]" />
             <div className="pointer-events-none absolute inset-y-12 right-3 w-1.5 rounded-full bg-sky-200/20 shadow-[0_0_20px_rgba(125,211,252,0.24)]" />
 
-            <div className="mb-4 grid grid-cols-[56px_1fr] items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">
+            <div className="mb-4 grid grid-cols-[44px_1fr] items-center gap-2 rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3 sm:grid-cols-[56px_1fr] sm:gap-3 sm:px-4">
               <span className="text-[10px] uppercase tracking-[0.18em] text-slate-500">Front</span>
               <div className="flex justify-between gap-3 text-[10px] uppercase tracking-[0.18em] text-slate-500">
                 <span>Galley</span>
@@ -150,7 +150,7 @@ export default function SeatMap({
             <div className="grid gap-2">
               <div className="grid grid-cols-[34px_1fr] gap-3">
                 <div />
-                <div className="flex gap-7">
+                <div className="flex gap-4 sm:gap-7">
                   {layout.blocks.map((block, index) => (
                     <div
                       key={`${layout.code}-labels-${index}`}
@@ -160,7 +160,7 @@ export default function SeatMap({
                       {block.map((letter) => (
                         <div
                           key={`${layout.code}-label-${letter}`}
-                          className="flex h-6 min-w-8 items-center justify-center text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400"
+                          className="flex h-5 min-w-7 items-center justify-center text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400 sm:h-6 sm:min-w-8 sm:text-[11px]"
                         >
                           {letter}
                         </div>
@@ -174,9 +174,9 @@ export default function SeatMap({
                 const row = rowIndex + 1;
                 const isExitRow = row === 12 || row === 13 || row === 20;
                 return (
-                  <div key={`${layout.code}-row-${row}`} className="grid grid-cols-[34px_1fr] items-center gap-3">
-                    <div className="flex h-9 items-center justify-end text-xs text-slate-500">{row}</div>
-                    <div className="flex items-center gap-7">
+                  <div key={`${layout.code}-row-${row}`} className="grid grid-cols-[28px_1fr] items-center gap-2 sm:grid-cols-[34px_1fr] sm:gap-3">
+                    <div className="flex h-8 items-center justify-end text-xs text-slate-500 sm:h-9">{row}</div>
+                    <div className="flex items-center gap-4 sm:gap-7">
                       {layout.blocks.map((block, blockIndex) => (
                         <div
                           key={`${layout.code}-${row}-${blockIndex}`}
@@ -191,7 +191,7 @@ export default function SeatMap({
                                 key={`${layout.code}-${row}-${letter}`}
                                 title={`${row}${letter} ${position}`}
                                 className={cn(
-                                  "relative flex h-9 min-w-8 items-center justify-center rounded-[10px] border text-[11px] font-semibold transition",
+                                  "relative flex h-8 min-w-7 items-center justify-center rounded-[9px] border text-[10px] font-semibold transition sm:h-9 sm:min-w-8 sm:rounded-[10px] sm:text-[11px]",
                                   "border-slate-700/80 bg-slate-900 text-slate-300 shadow-[inset_0_3px_0_rgba(255,255,255,0.05)]",
                                   "before:absolute before:left-1 before:right-1 before:top-1 before:h-1 before:rounded-full before:bg-white/10",
                                   isExitRow && "border-amber-300/20",

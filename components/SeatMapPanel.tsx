@@ -1,24 +1,31 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Rows3 } from "lucide-react";
 
 import SeatMap from "@/components/SeatMap";
+import { getAircraftSeoProfile } from "@/utils/aircraftSeo";
 
 interface SeatMapPanelProps {
   aircraftDisplayName?: string | null;
+  initialSeatNumber?: string;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  redirectOnOpen?: boolean;
 }
 
 export default function SeatMapPanel({
   aircraftDisplayName = null,
+  initialSeatNumber = "",
   defaultOpen = false,
   onOpenChange,
+  redirectOnOpen = false,
 }: SeatMapPanelProps) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [aircraftType, setAircraftType] = useState(() => extractSeatMapType(aircraftDisplayName || ""));
-  const [seatNumber, setSeatNumber] = useState("");
+  const [seatNumber, setSeatNumber] = useState(initialSeatNumber);
 
   useEffect(() => {
     onOpenChange?.(isOpen);
@@ -39,10 +46,22 @@ export default function SeatMapPanel({
         <button
           type="button"
           aria-expanded={isOpen}
-          onClick={() => setIsOpen((value) => !value)}
+          onClick={() => {
+            if (redirectOnOpen) {
+              const params = new URLSearchParams();
+              if (seatNumber.trim()) params.set("seat", seatNumber.trim().toUpperCase());
+              const aircraftProfile = getAircraftSeoProfile(aircraftType);
+              const path = aircraftProfile
+                ? `/aircraft/${aircraftProfile.slug}`
+                : `/seat-map-checker${aircraftType.trim() ? `?aircraft=${encodeURIComponent(aircraftType.trim().toUpperCase())}` : ""}`;
+              router.push(`${path}${params.size ? `${path.includes("?") ? "&" : "?"}${params.toString()}` : ""}`);
+              return;
+            }
+            setIsOpen((value) => !value);
+          }}
           className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:border-accent/40 hover:bg-accent/10"
         >
-          {isOpen ? "Close seat map" : "Open seat map"}
+          {redirectOnOpen ? "View seat map" : isOpen ? "Close seat map" : "Open seat map"}
         </button>
       </div>
 
