@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -11,6 +10,8 @@ import {
   Route,
   ShieldCheck,
 } from "lucide-react";
+
+import LogoIcon from "@/components/LogoIcon";
 
 const siteUrl = "https://aerotrackr.online";
 
@@ -341,21 +342,7 @@ function LogoGrid({ items }: { items: LogoItem[] }) {
     <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => (
         <div key={item.code} className="flex min-h-19 items-center gap-4 rounded-[22px] border border-white/10 bg-white/[0.035] p-3">
-          <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white p-2">
-            <span className="absolute inset-0 flex items-center justify-center bg-accent/10 font-mono text-sm font-bold text-accent">
-              {item.code}
-            </span>
-            <Image
-              aria-hidden="true"
-              alt=""
-              src={`https://www.google.com/s2/favicons?domain=${item.domain}&sz=128`}
-              width={48}
-              height={48}
-              className="relative z-10 h-full w-full object-contain"
-              loading="lazy"
-              unoptimized
-            />
-          </div>
+          <LogoIcon code={item.code} domain={item.domain} label={item.name} size={48} />
           <div className="min-w-0">
             <p className="text-sm font-semibold text-white">{item.name}</p>
             <p className="mt-1 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-accent/80">{item.code}</p>

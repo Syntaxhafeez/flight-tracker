@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownToLine, ArrowUpFromLine, Building2, Clock3, RadioTower } from "lucide-react";
 
 import AirportBoard from "@/components/AirportBoard";
+import LogoIcon from "@/components/LogoIcon";
 import type { AirportBoardMode } from "@/types/flight";
 import { airportSeoProfiles } from "@/utils/airportSeo";
 
@@ -206,28 +206,15 @@ export default async function AirportArrivalsDeparturesPage({
         <section className="glass-panel rounded-[30px] p-5 sm:p-7">
           <p className="section-label">Popular airport searches</p>
           <h2 className="mt-3 text-2xl font-semibold text-white">Supported airports</h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {airportSeoProfiles.map((airport) => (
               <Link
                 key={airport.code}
                 href={`/airport/${airport.slug}`}
-                className="rounded-[22px] border border-white/10 bg-white/[0.035] p-4 transition hover:border-accent/35 hover:bg-accent/10"
+                className="rounded-[20px] border border-white/10 bg-white/[0.035] p-3 transition hover:border-accent/35 hover:bg-accent/10"
               >
-                <div className="relative flex h-13 w-13 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white p-2">
-                  <span className="absolute inset-0 flex items-center justify-center bg-accent/10 font-mono text-sm font-bold text-accent">
-                    {airport.code}
-                  </span>
-                  <Image
-                    aria-hidden="true"
-                    alt=""
-                    src={`https://www.google.com/s2/favicons?domain=${airport.domain}&sz=128`}
-                    width={44}
-                    height={44}
-                    className="relative z-10 h-full w-full object-contain"
-                    unoptimized
-                  />
-                </div>
-                <p className="mt-4 text-sm font-semibold text-white">{airport.city} Airport</p>
+                <LogoIcon code={airport.code} domain={airport.domain} label={airport.airportName} size={38} />
+                <p className="mt-3 text-sm font-semibold text-white">{airport.city} Airport</p>
                 <p className="mt-1 text-xs leading-5 text-slate-500">{airport.airportName}</p>
                 <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">Open board</p>
               </Link>

@@ -70,6 +70,20 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+main {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+a,
+button,
+span {
+  overflow-wrap: anywhere;
+}
+
 body::before {
   content: "";
   position: fixed;

@@ -146,7 +146,7 @@ export default function AirportBoard({
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <form onSubmit={handleSubmit} className="min-w-0 sm:w-75">
-              <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/4">
+              <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.04]">
                 <Search
                   aria-hidden="true"
                   className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -158,7 +158,7 @@ export default function AirportBoard({
                   onChange={(event) => setAirportCode(event.target.value.toUpperCase())}
                   placeholder="DEL"
                   aria-label="Airport IATA code"
-                  className="h-13 w-full bg-transparent pl-11 pr-27 font-mono text-sm font-semibold uppercase tracking-[0.28em] text-white outline-none placeholder:text-slate-500"
+                  className="h-13 w-full bg-transparent pl-11 pr-24 font-mono text-sm font-semibold uppercase tracking-[0.18em] text-white outline-none placeholder:text-slate-500 sm:pr-27 sm:tracking-[0.28em]"
                   maxLength={3}
                   disabled={isLoading}
                 />
@@ -172,7 +172,7 @@ export default function AirportBoard({
               </div>
             </form>
 
-            <div className="grid grid-cols-2 rounded-[22px] border border-white/10 bg-white/4 p-1">
+            <div className="grid grid-cols-2 rounded-[22px] border border-white/10 bg-white/[0.04] p-1">
               <ModeButton
                 active={mode === "departure"}
                 icon={ArrowUpFromLine}
