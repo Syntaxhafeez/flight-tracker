@@ -180,11 +180,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <Script
+        <meta name="google-adsense-account" content="ca-pub-2579358094722298" />
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2579358094722298"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
         <Script
           id="ms-clarity"
