@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     "Airbus seat map",
   ],
   alternates: {
-    canonical: "https://aerotrackr.online",
+    canonical: "/",
   },
   authors: [{ name: "AeroTrack" }],
   creator: "AeroTrack",
@@ -123,23 +123,6 @@ const structuredData = {
       description:
         "Live flight tracking with real-time positions, airport intelligence, aircraft details, and seat maps.",
       inLanguage: "en",
-      potentialAction: [
-        {
-          "@type": "SearchAction",
-          target: "https://aerotrackr.online/?flight={flight_number}",
-          "query-input": "required name=flight_number",
-        },
-        {
-          "@type": "SearchAction",
-          target: "https://aerotrackr.online/airport-arrivals-departures?airport={airport_iata}",
-          "query-input": "required name=airport_iata",
-        },
-        {
-          "@type": "SearchAction",
-          target: "https://aerotrackr.online/seat-map-checker?aircraft={aircraft_type}&seat={seat_number}",
-          "query-input": "required name=aircraft_type",
-        },
-      ],
     },
     {
       "@type": "Organization",
